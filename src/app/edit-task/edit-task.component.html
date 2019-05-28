@@ -1,0 +1,45 @@
+<div nz-row>
+  <div nz-col nzSpan="8">
+    <div nz-col nzSpan="24" class="padding10px">
+      <button nz-col nzSpan="2" nz-button nzType="primary" nzShape="circle" (click)="goBack()"><i nz-icon type="arrow-left"></i></button>
+      <div nz-col nzSpan="18" class="floatRight">
+        <button class="floatRight" nz-button nzType="primary" nzShape="circle" (click)="goBack()"><i nz-icon nzType="close" nzTheme="outline"></i></button>
+        <button class="floatRight marginRight10px" nz-button nzType="primary" nzShape="circle" (click)="deleteTask()"><i nz-icon nzType="delete" nzTheme="outline"></i></button>
+      </div>
+    </div>
+    <div nz-col nzSpan="24">
+      <form nz-form [formGroup]="taskForm">
+        <nz-form-item>
+          <!-- <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label> -->
+          <div nz-row>
+            <div nz-col nzSpan="24" class="padding10px">
+              <input nz-input placeholder="Enter Title" formControlName="title" />
+            </div>
+            <div nz-col nzSpan="24" class="padding10px">
+              <textarea rows="4" nz-input formControlName="details" placeholder="Add Details"></textarea>
+            </div>
+            <div nz-col nzSpan="24" class="padding10px">
+                <nz-date-picker
+                nzShowTime
+                nzFormat="yyyy-MM-dd HH:mm:ss"
+                nzPlaceHolder="Add Date/Time"
+                formControlName="date"
+              ></nz-date-picker>
+            </div>
+            <div nz-col nzSpan="24" class="padding10px">
+              <nz-form-control [nzSpan]="24" *ngFor="let o of getTasks.controls; let i = index" formArrayName="subTasks">
+                <div [formGroupName]="i" nz-row>
+                  <label class="labelCss" nz-col nzSpan="1" nz-radio formControlName="bool" (click)="completed(i)"></label>
+                  <div nz-col nzSpan="21">
+                    <input type="text" nz-input formControlName="task"/>
+                  </div>
+                </div>
+              </nz-form-control>
+              <button nz-button nzType="primary" (click)="addSubTask()"><i nz-icon type="plus"></i> Add subtasks</button>
+            </div>
+          </div>
+        </nz-form-item >
+      </form>
+    </div>
+  </div>
+</div>

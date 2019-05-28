@@ -1,0 +1,40 @@
+<div nz-row>
+  <nz-dropdown >
+    <button nz-button nz-dropdown><span>Button</span> <i nz-icon type="down"></i></button>
+    <ul nz-menu>
+      <li nz-menu-item>
+        <a>1st menu item</a>
+      </li>
+      <li nz-menu-item>
+        <a>2nd menu item</a>
+      </li>
+      <li nz-menu-item>
+        <a>3rd menu item</a>
+      </li>
+    </ul>
+  </nz-dropdown>
+</div>
+<button nz-button nzType="primary" (click)="addTask()"><i nz-icon type="plus"></i> Add a Task</button>
+
+<form nz-form [formGroup]="taskForm">
+  <nz-form-item>
+    <!-- <nz-form-label [nzSpan]="6" nzFor="email">E-mail</nz-form-label> -->
+    <div nz-row>
+      <div nz-col nzSpan="8">
+        <nz-form-control [nzSpan]="24" *ngFor="let o of getTasks.controls; let i = index" formArrayName="tasks">
+          <div [formGroupName]="i" nz-row>
+            <label class="labelCss" nz-col nzSpan="1" nz-radio formControlName="bool" (click)="completed(i)"></label>
+            <div nz-col nzSpan="21">
+              <nz-input-group [nzSuffix]="suffixIconSearch">
+                <input type="text" nz-input formControlName="task"/>
+              </nz-input-group>
+              <ng-template #suffixIconSearch>
+                <i nz-icon type="edit" (click)="editTask(i)"></i>
+              </ng-template>
+            </div>
+          </div>
+        </nz-form-control>
+      </div>
+    </div>
+  </nz-form-item >
+</form>
